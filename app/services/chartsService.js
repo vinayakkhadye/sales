@@ -4,10 +4,15 @@ app.service('chartsService', function () {
 									   
     this.getOrdersChartForMonth = function () {
 		
-        return '[{"orders":{"order_date":"2017-01-25"},"0":{"total_orders":"1"}}]';
+        return	[
+				{
+					"orders":{"order_date":"2016-12-15"},
+					"0":{"total_orders":"10"}
+				}
+				];
     };
 	
     this.getProductsSaleChartForMonth = function () {
-        return '[{"p":{"name":"tooth brush"},"0":{"total_product_sale":"1"}}]';
+        return [{"p":{"name":"tooth brush"},"0":{"total_product_sale":"1"}}];
     };
 });

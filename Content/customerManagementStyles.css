@@ -1,5 +1,8 @@
-﻿body {
-    padding: 65px;
+﻿html{
+margin:0px;padding:0px;
+}
+body {
+    /*padding: 65px;*/
 }
 
 .view {

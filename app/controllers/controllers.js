@@ -58,40 +58,53 @@ app.controller('OrdersController', function ($scope, $location, ordersService) {
 app.controller('ChartsController', function ($scope, $routeParams,$location, chartsService) {
 	init();
 	function init() {
-		if ($routeParams.chartName == 'getOrdersChartForMonth'){
-			
-		  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-		  $scope.series = ['Series A', 'Series B'];
-		  $scope.data = [
-			[65, 59, 80, 81, 56, 55, 40],
-			[28, 48, 40, 19, 86, 27, 90]
-		  ];
-		  $scope.onClick = function (points, evt) {
-			console.log(points, evt);
-		  };
-		  /*$scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];*/
 		
-		  $scope.options = {
-			scales: {
-			  yAxes: [
-				{
-				  id: 'y-axis-1',
-				  type: 'linear',
-				  display: true,
-				  position: 'left'
-				},
-				{
-				  id: 'y-axis-2',
-				  type: 'linear',
-				  display: true,
-				  position: 'right'
-				}
-			  ]
-			}
-		  };
-
-
+		if ($routeParams.chartName == 'getOrdersChartForMonth') {
+			var currentDate = new Date(), y = currentDate.getFullYear(), m = currentDate.getMonth();
+			var noOfDays = new Date(y, m , 0).getDate();
+			$scope.labels = [];
+			$scope.monthDays = [];
+			$scope.monthSales = [];
+			$scope.dbDaysSale = [];
+			$scope.series = ['Product'];
+			var day = "";
+			
 			$scope.ordersbydate = chartsService.getOrdersChartForMonth();	
+			console.log($scope.ordersbydate);
+			for(val in $scope.ordersbydate) {
+				day = new Date($scope.ordersbydate[0].orders.order_date);
+				day = day.toLocaleDateString("en-US")
+				$scope.dbDaysSale.push([day,$scope.ordersbydate[0][0].total_orders]);
+			}
+			console.log($scope.dbDaysSale);
+			
+			for(i=1;i<=noOfDays;i++) {
+				day = new Date(y, m-1, i);
+				$scope.monthDays.push(day.toLocaleDateString("en-US"));
+				$scope.labels.push(day.toLocaleDateString("en-US"));	
+			}
+			console.log($scope.monthDays);
+			
+			for (val in $scope.monthDays){
+				for (val1 in $scope.dbDaysSale){
+					//console.log($scope.monthDays[val]);
+					//console.log($scope.dbDaysSale[val1][0]);
+					if( $scope.monthDays[val] == $scope.dbDaysSale[val1][0] ){
+						$scope.monthSales.push($scope.dbDaysSale[val1][1]);
+					}else{
+						$scope.monthSales.push(0);
+					}
+				}
+			}
+			console.log($scope.monthSales);
+			$scope.data = [
+			$scope.monthSales
+			];			
+			
+			
+			
+			//console.log($scope.ordersbydate[0].orders.order_date);
+			//console.log($scope.ordersbydate[0][0].total_orders);
 		}else if ($routeParams.chartName == 'getProductsSaleChartForMonth'){
 			$scope.ordersbydate = chartsService.getProductsSaleChartForMonth();	
 		}else{

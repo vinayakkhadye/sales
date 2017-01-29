@@ -15,8 +15,8 @@
                     <img src="Content/Images/people.png" alt="logo"> Customer Manager
                 </a>
                 <ul class="nav nav-pills" data-ng-controller="NavbarController">
-                    <li data-ng-class="{'active':getClass('/solddatewise')}"><a href="#/solddatewise">Sold vs Date</a></li>
-                    <li data-ng-class="{'active':getClass('/totalproductsale')}"><a href="#/totalproductsale">Product Total Sales vs Product Name</a></li>
+                    <li data-ng-class="{'active':getClass('/charts/getOrdersChartForMonth')}"><a href="#/charts/getOrdersChartForMonth">Sold vs Date</a></li>
+                    <li data-ng-class="{'active':getClass('/charts/getProductsSaleChartForMonth')}"><a href="#/charts/getProductsSaleChartForMonth">Product Total Sales vs Product Name</a></li>
                 </ul>
             </div>
         </div>
@@ -47,9 +47,8 @@
     <script src="Scripts/angular.js"></script>
     <script src="Scripts/angular-route.js"></script>
     <script src="Scripts/jquery.min.js"></script>
-	<script src="//cdn.jsdelivr.net/angular.chartjs/latest/angular-chart.min.js"></script>
-
-
+	<script src="Scripts/node_modules/chart.js/dist/Chart.min.js"></script>
+	<script src="Scripts/node_modules/angular-chart.js/dist/angular-chart.min.js"></script>
     <!-- UI Libs -->
     <script src="Scripts/bootstrap.js"></script>
 
@@ -60,6 +59,7 @@
     <script src="app/services/customersService.js"></script>
 	<script src="app/services/loginService.js"></script>
 	<script src="app/services/ordersService.js"></script>
+	<script src="app/services/chartsService.js"></script>
     <script src="app/directives/animatedView.js"></script>
 </body>
 </html>

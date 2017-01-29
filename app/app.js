@@ -19,7 +19,7 @@
 
   #######################################################################*/
 
-var app = angular.module('customersApp', ['ngRoute']);
+var app = angular.module('customersApp', ['ngRoute','chart.js']);
 
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider) {
@@ -34,6 +34,12 @@ app.config(function ($routeProvider) {
                 controller: 'OrdersController',
                 templateUrl: 'app/partials/orders.html'
             })
+        .when('/charts/:chartName',
+            {
+                controller: 'ChartsController',
+                templateUrl: 'app/partials/charts.html'
+            })
+		
         .when('/customers',
             {
                 controller: 'CustomersController',

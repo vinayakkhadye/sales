@@ -49,7 +49,8 @@
 		<td>{{order.o.order_date}}</td>
 		<td>{{order.o.order_time}}</td>
 		<td>{{order.o.order_price}}</td>
-		<td> <input type="text" ng-model="order.o.deliver_date" value="{{ order.o.deliver_date }}" ng-readonly="readonly" ng-dblclick="enableDeliveryDate(this,order.o.deliver_date)" ng-blur="disableDeliveryDate(this,order.o.deliver_date,order.o.id)" /> </td>
+		<td><input type="text" ng-model="order.o.deliver_date" value="{{ order.o.deliver_date }}" ng-readonly="readonly" 
+		ng-dblclick="enableDeliveryDate(this,order.o.deliver_date)" ng-blur="disableDeliveryDate(this,order.o.deliver_date,order.o.id)" /></td>
 		<td>{{order.o.order_quantity}}</td>
 		<td>{{order.p.product_name}}</td>
 		<td>{{order.c.customer_name}}</td>

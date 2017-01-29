@@ -13,7 +13,6 @@ app.controller('LoginController', function ($scope, $location, loginService) {
 
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
     //one place...not required though especially in the simple example below
-
     $scope.login = function() {
         $scope.login = loginService.login();
 		
@@ -21,7 +20,6 @@ app.controller('LoginController', function ($scope, $location, loginService) {
 		{
 			$location.path( "/orders" );
 		}
-		
     }
 });
 
@@ -55,6 +53,52 @@ app.controller('OrdersController', function ($scope, $location, ordersService) {
 			//obj.value = $scope.old_delivery_date;
 		}
 	};
+});
+
+app.controller('ChartsController', function ($scope, $routeParams,$location, chartsService) {
+	init();
+	function init() {
+		if ($routeParams.chartName == 'getOrdersChartForMonth'){
+			
+		  $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+		  $scope.series = ['Series A', 'Series B'];
+		  $scope.data = [
+			[65, 59, 80, 81, 56, 55, 40],
+			[28, 48, 40, 19, 86, 27, 90]
+		  ];
+		  $scope.onClick = function (points, evt) {
+			console.log(points, evt);
+		  };
+		  /*$scope.datasetOverride = [{ yAxisID: 'y-axis-1' }, { yAxisID: 'y-axis-2' }];*/
+		
+		  $scope.options = {
+			scales: {
+			  yAxes: [
+				{
+				  id: 'y-axis-1',
+				  type: 'linear',
+				  display: true,
+				  position: 'left'
+				},
+				{
+				  id: 'y-axis-2',
+				  type: 'linear',
+				  display: true,
+				  position: 'right'
+				}
+			  ]
+			}
+		  };
+
+
+			$scope.ordersbydate = chartsService.getOrdersChartForMonth();	
+		}else if ($routeParams.chartName == 'getProductsSaleChartForMonth'){
+			$scope.ordersbydate = chartsService.getProductsSaleChartForMonth();	
+		}else{
+			$location.path( "/orders" );
+		}
+	}
+	
 });
 
 //This controller retrieves data from the customersService and associates it with the $scope

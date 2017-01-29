@@ -1,0 +1,59 @@
+﻿<div class="orders view">
+<div class="container">
+	<header><h3>All Customer Orders</h3></header>
+	<!--span class="label">Ordered By: {{orderByField}}, Reverse Sort: {{reverseSort}}</span><br><br-->
+	<table class="table table-hover table-striped table-condensed table-bordered ordersTable">
+	<thead>
+	  <tr>
+		<th ng-click="orderByField='o.id'; reverseSort = !reverseSort">
+		  Order ID <span ng-show="orderByField == 'o.id'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+		</th>
+		
+		<th ng-click="orderByField='o.order_date'; reverseSort = !reverseSort">
+		  Order Date <span ng-show="orderByField == 'o.order_date'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+		</th>
+		
+		<th ng-click="orderByField='o.order_time'; reverseSort = !reverseSort">
+		  Order Time <span ng-show="orderByField == 'o.order_time'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+		</th>
+		
+		<th ng-click="orderByField='o.order_price'; reverseSort = !reverseSort">
+		  Order Price <span ng-show="orderByField == 'o.order_price'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+		</th>
+		
+		<th ng-click="orderByField='o.deliver_date'; reverseSort = !reverseSort">
+		  Order Delivery Date <span ng-show="orderByField == 'o.deliver_date'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+		</th>
+		
+		<th ng-click="orderByField='o.order_quantity'; reverseSort = !reverseSort">
+		  Order Quantity <span ng-show="orderByField == 'o.order_quantity'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+		</th>
+		
+		<th ng-click="orderByField='p.product_name'; reverseSort = !reverseSort">
+			Product Name <span ng-show="orderByField == 'p.product_name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+		</th>
+		<th ng-click="orderByField='c.customer_name'; reverseSort = !reverseSort">
+		  Customer Name <span ng-show="orderByField == 'c.customer_name'"><span ng-show="!reverseSort">^</span><span ng-show="reverseSort">v</span></span>
+		</th>
+	  </tr>
+	</thead>
+	<tbody>
+	<tr data-ng-hide="orders.length > 0" class="error">
+		<td colspan="3">
+			<div class="text-center"><strong>No orders found</strong></div>
+		</td>
+	</tr>
+	
+	  <tr ng-repeat="order in orders|orderBy:orderByField:reverseSort">
+		<td>{{order.o.id}}</td>
+		<td>{{order.o.order_date}}</td>
+		<td>{{order.o.order_time}}</td>
+		<td>{{order.o.order_price}}</td>
+		<td> <input type="text" ng-model="order.o.deliver_date" value="{{ order.o.deliver_date }}" ng-readonly="readonly" ng-dblclick="enableDeliveryDate(this,order.o.deliver_date)" ng-blur="disableDeliveryDate(this,order.o.deliver_date,order.o.id)" /> </td>
+		<td>{{order.o.order_quantity}}</td>
+		<td>{{order.p.product_name}}</td>
+		<td>{{order.c.customer_name}}</td>
+	  </tr>
+	</tbody>
+	</table>
+</div>

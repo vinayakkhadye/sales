@@ -1,0 +1,25 @@
+<div class="view">
+    <div class="container">
+        <header>
+            <h3>Login User</h3>
+        </header>
+        <div class="row">
+            <div class="span3">
+                User Name:
+                <br />
+                <input data-ng-model="userName" type="text" placeholder="User Name">
+            </div>
+            <div class="span3">
+                Last Name:
+                <br />
+                <input data-ng-model="password" type="password" placeholder="Password">
+            </div>
+            <div class="span3">
+				<br />
+                <button id="loginUser" class="btn btn-primary" type="button" 
+				data-ng-disabled="!userName || !password" 
+				data-ng-click="login()">Login</button>
+            </div>
+        </div>
+    </div>
+</div>

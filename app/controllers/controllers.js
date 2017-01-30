@@ -28,14 +28,16 @@ app.controller('OrdersController', function ($scope, $location, ordersService) {
 	$scope.old_delivery_date = "";
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
     //one place...not required though especially in the simple example below
-    init();
-
-    function init() {
+	
+	ordersService.getOrders().then(function(response) {
+		$scope.orders 		= response.data;	
 		$scope.orderByField = 'o.id';
 		$scope.reverseSort  = false;
-        $scope.orders 		= ordersService.getOrders();
+		
 		$scope.readonly		= true;
-    }
+		
+	});
+
 	
 	$scope.enableDeliveryDate	= function(obj,date){
 		obj.readonly			= false;

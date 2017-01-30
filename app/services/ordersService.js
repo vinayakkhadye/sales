@@ -5,8 +5,8 @@ app.service('ordersService', function ($http) {
     this.getOrders = function () {
         return  $http({
             method: 'GET',
-            url: 'http://localhost/cakeangularjs/order',
-			//url: 'http://52.86.237.61/cakeangularjs/order',
+            //url: 'http://localhost/cakeangularjs/order',
+			url: 'http://52.86.237.61/cakeangularjs/order',
         }).then(function(response) {
             return response;
         }).catch(function(error) {

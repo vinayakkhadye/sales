@@ -10,7 +10,6 @@ app.service('chartsService', function ($http,$q) {
             //params: params,
             //cache: Schools.schoolCache,
         }).success(function(response) {
-			console.log(response);
             return response;
         });
 		

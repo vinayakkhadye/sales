@@ -107,6 +107,8 @@ app.controller('ChartsController', function ($scope, $routeParams,$location, cha
 			}
 			
 			$scope.data = [$scope.monthSales];			
+			console.log($scope.labels);
+			console.log($scope.data);
 			
 		}
 		else if ($routeParams.chartName == 'getProductsSaleChartForMonth')

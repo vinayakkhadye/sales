@@ -17,6 +17,7 @@
 					<li data-ng-class="{'active':getClass('/orders')}"><a href="#/orders">Orders</a></li>
                     <li data-ng-class="{'active':getClass('/charts/getOrdersChartForMonth')}"><a href="#/charts/getOrdersChartForMonth">Sold vs Date</a></li>
                     <li data-ng-class="{'active':getClass('/charts/getProductsSaleChartForMonth')}"><a href="#/charts/getProductsSaleChartForMonth">Product Total Sales vs Product Name</a></li>
+					<li><a ng-click= "logout()">logout</a></li>
                 </ul>
             </div>
         </div>
@@ -56,6 +57,8 @@
     <!-- App libs -->
     <script src="app/app.js"></script>
     <script src="app/controllers/controllers.js"></script>
+	<script src="app/services/authFactory.js"></script>
+	
     <script src="app/services/customersService.js"></script>
 	<script src="app/services/loginService.js"></script>
 	<script src="app/services/ordersService.js"></script>

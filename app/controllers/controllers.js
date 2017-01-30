@@ -9,7 +9,7 @@
   #######################################################################*/
 
 
-app.controller('LoginController', function ($scope, $location, loginService) {
+app.controller('LoginController', function ($scope, $rootScope, $location, loginService) {
 
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
     //one place...not required though especially in the simple example below
@@ -18,6 +18,7 @@ app.controller('LoginController', function ($scope, $location, loginService) {
 		var userName 	= $scope.userName;
 		var password	= $scope.password;
 		$scope.isUser	= "";
+		$rootScope.userToken = $scope.userName;
 		
 		loginService.login(userName,password).then(function(response){
 			
@@ -37,46 +38,54 @@ app.controller('LoginController', function ($scope, $location, loginService) {
     }
 });
 
-app.controller('OrdersController', function ($scope, $location, ordersService) {
-	$scope.orders = [];
-	$scope.old_delivery_date = "";
-    //I like to have an init() for controllers that need to perform some initialization. Keeps things in
-    //one place...not required though especially in the simple example below
-	
-	ordersService.getOrders().then(function(response) {
-		$scope.orders 		= response.data;	
-		$scope.orderByField = 'o.id';
-		$scope.reverseSort  = false;
-		
-		$scope.readonly		= true;
-		
-	});
-
-	
-	$scope.enableDeliveryDate	= function(obj,date){
-		obj.readonly			= false;
-		$scope.old_delivery_date= date;
-	};
-	
-	$scope.disableDeliveryDate	= function(obj,new_delivery_date,id){
-		obj.readonly			= true;
-		var date	=	new Date(new_delivery_date);		
-		if(angular.isDate(date) && $scope.old_delivery_date != new_delivery_date){
-			ordersService.updateDispatchDate(new_delivery_date,id).then(function(response){
-				console.log(response);
-			});
-			//console.log(id);	
-		}else
+app.controller('OrdersController', function ($scope,$rootScope, $location, ordersService) {
+	init();
+	function init()
+	{
+		if($rootScope.userToken ==false)
 		{
-			//console.log($scope.old_delivery_date + ' '+  new_delivery_date);	
-			//obj.value = $scope.old_delivery_date;
+			$location.path( "/login" );
 		}
-	};
+		$scope.orders = [];
+		$scope.old_delivery_date = "";
+		
+		ordersService.getOrders().then(function(response)
+		{
+			$scope.orders 		= response.data;	
+			$scope.orderByField = 'o.id';
+			$scope.reverseSort  = false;
+			$scope.readonly		= true;
+		});
+
+		$scope.enableDeliveryDate	= function(obj,date)
+		{
+			obj.readonly			= false;
+			$scope.old_delivery_date= date;
+		};
+		
+		$scope.disableDeliveryDate	= function(obj,new_delivery_date,id)
+		{
+			obj.readonly	= true;
+			var date		= new Date(new_delivery_date);		
+			if(angular.isDate(date) && $scope.old_delivery_date != new_delivery_date)
+			{
+				ordersService.updateDispatchDate(new_delivery_date,id).then(function(response)
+				{
+					console.log(response);
+				});
+				//console.log(id);	
+			}
+		};
+	}
 });
 
-app.controller('ChartsController', function ($scope, $routeParams,$location, chartsService) {
+app.controller('ChartsController', function ($scope,$rootScope, $routeParams,$location, chartsService) {
 	init();
 	function init() {
+		if($rootScope.userToken ==false)
+		{
+			$location.path( "/login" );
+		}
 		
 		if ($routeParams.chartName == 'getOrdersChartForMonth')
 		{
@@ -163,7 +172,7 @@ app.controller('ChartsController', function ($scope, $routeParams,$location, cha
 
 //This controller retrieves data from the customersService and associates it with the $scope
 //The $scope is ultimately bound to the customers view
-app.controller('CustomersController', function ($scope, customersService) {
+app.controller('CustomersController', function ($scope,$rootScope, customersService) {
 
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
     //one place...not required though especially in the simple example below
@@ -191,7 +200,7 @@ app.controller('CustomersController', function ($scope, customersService) {
 
 //This controller retrieves data from the customersService and associates it with the $scope
 //The $scope is bound to the order view
-app.controller('CustomerOrdersController', function ($scope, $routeParams, customersService) {
+app.controller('CustomerOrdersController', function ($scope,$rootScope, $routeParams, customersService) {
     $scope.customer = {};
     $scope.ordersTotal = 0.00;
 
@@ -210,7 +219,7 @@ app.controller('CustomerOrdersController', function ($scope, $routeParams, custo
 });
 
 
-app.controller('NavbarController', function ($scope, $location) {
+app.controller('NavbarController', function ($scope,$rootScope, $location) {
     $scope.getClass = function (path) {
         if ($location.path().substr(0, path.length) == path) {
             return true
@@ -223,7 +232,7 @@ app.controller('NavbarController', function ($scope, $location) {
 //This controller is a child controller that will inherit functionality from a parent
 //It's used to track the orderby parameter and ordersTotal for a customer. Put it here rather than duplicating 
 //setOrder and orderby across multiple controllers.
-app.controller('OrderChildController', function ($scope) {
+app.controller('OrderChildController', function ($scope,$rootScope) {
     $scope.orderby = 'product';
     $scope.reverse = false;
     $scope.ordersTotal = 0.00;

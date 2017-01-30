@@ -20,7 +20,16 @@
   #######################################################################*/
 
 var app = angular.module('customersApp', ['ngRoute','chart.js']);
-
+app.run(function($rootScope,$location) {
+    $rootScope.userToken = false;
+	$rootScope.logout	= function(){
+		$rootScope.userToken = false;
+		$location.path( "/login" );
+	}
+})
+app.config(['$httpProvider', function($httpProvider) {  
+    $httpProvider.interceptors.push('myInterceptor');
+}]);
 //This configures the routes and associates each route with a view and a controller
 app.config(function ($routeProvider) {
     $routeProvider

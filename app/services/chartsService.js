@@ -28,4 +28,5 @@ app.service('chartsService', function ($http) {
 		
         /*return [{"p":{"name":"tooth brush"},"0":{"total_product_sale":"7"}},{"p":{"name":"shampoo"},"0":{"total_product_sale":"3"}},{"p":{"name":"headphones"},"0":{"total_product_sale":"1"}}];*/
     };
+	
 });

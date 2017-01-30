@@ -18,8 +18,9 @@
 				<br />
                 <button id="loginUser" class="btn btn-primary" type="button" 
 				data-ng-disabled="!userName || !password" 
-				data-ng-click="login()">Login</button>
+				data-ng-click="login(userName,password)">Login</button>
             </div>
+			<div class="span12">{{message}}</div>
         </div>
     </div>
 </div>

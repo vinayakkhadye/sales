@@ -1,12 +1,22 @@
 //This handles retrieving data and is used by controllers. 3 options (server, factory, provider) with 
 //each doing the same thing just structuring the functions/data differently.
-app.service('loginService', function () {
+app.service('loginService', function ($http) {
     this.getUser = function () {
         return users;
     };
 
-    this.login = function (id) {
-        return true;
+    this.login = function (userName,password) {
+        return  $http({
+            method: 'GET',
+            //url: 'http://localhost/cakeangularjs/login/index/'+userName+'/'+password,
+			url: 'http://52.86.237.61/cakeangularjs/login/index/'+userName+'/'+password,
+        }).then(function(response) {
+			//console.log(response);
+            return response;
+        }).catch(function(error) {
+			return false;
+        });
+		
     };
 
     var users = [	

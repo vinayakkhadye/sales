@@ -14,12 +14,19 @@ app.controller('LoginController', function ($scope, $location, loginService) {
     //I like to have an init() for controllers that need to perform some initialization. Keeps things in
     //one place...not required though especially in the simple example below
     $scope.login = function() {
-        $scope.login = loginService.login();
-		
-		if($scope.login)
-		{
-			$location.path( "/orders" );
-		}
+		loginService.login($scope.userName,$scope.password).then(function(response){
+			$scope.message	= "";
+			$scope.login	= response.data;	
+			console.log(response.	data);
+			if($scope.login=='1')
+			{
+				$location.path( "/orders" );
+			}
+			else
+			{
+				$scope.message = "wrong username or password";
+			}
+		});
     }
 });
 

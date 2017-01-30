@@ -12,6 +12,7 @@ app.service('chartsService', function ($http,$q) {
         }).success(function(response) {
             dfd.resolve(response || response);
         });
+		console.log(dfd.promise);
 		return dfd.promise;
 		
         /*return	[{"orders":{"order_date":"2016-12-14"},"0":{"total_orders":"2"}},{"orders":{"order_date":"2016-12-15"},"0":{"total_orders":"1"}},{"orders":{"order_date":"2016-12-16"},"0":{"total_orders":"1"}},{"orders":{"order_date":"2016-12-20"},"0":{"total_orders":"1"}}];*/

@@ -3,17 +3,15 @@
 app.service('chartsService', function ($http,$q) {
 									   
     this.getOrdersChartForMonth = function () {
-		var dfd = $q.defer();
+		
         $http({
             method: 'GET',
             url: 'http://52.86.237.61/cakeangularjs/order/getOrdersChartForMonth/previous',
             //params: params,
             //cache: Schools.schoolCache,
         }).success(function(response) {
-            dfd.resolve(response || response);
+            return response;
         });
-		console.log(dfd.promise);
-		return dfd.promise;
 		
         /*return	[{"orders":{"order_date":"2016-12-14"},"0":{"total_orders":"2"}},{"orders":{"order_date":"2016-12-15"},"0":{"total_orders":"1"}},{"orders":{"order_date":"2016-12-16"},"0":{"total_orders":"1"}},{"orders":{"order_date":"2016-12-20"},"0":{"total_orders":"1"}}];*/
     };

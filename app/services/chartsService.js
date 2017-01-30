@@ -6,7 +6,8 @@ app.service('chartsService', function ($http,$q) {
 		//var dfd = $q.defer();
         return  $http({
             method: 'GET',
-            url: 'http://localhost/cakeangularjs/order/getOrdersChartForMonth/current',
+            //url: 'http://localhost/cakeangularjs/order/getOrdersChartForMonth/current',
+			url: 'http://52.86.237.61/cakeangularjs/order/getOrdersChartForMonth/previous',
         }).then(function(response) {
             return response;
         }).catch(function(error) {

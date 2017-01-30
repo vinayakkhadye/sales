@@ -21,7 +21,7 @@ app.controller('LoginController', function ($scope, $rootScope, $location, login
 		
 		loginService.login(userName,password).then(function(response)
 		{
-			$scope.message	= "";
+			$scope.message	= false;
 			$scope.isUser	= response.data;
 			
 			if($scope.isUser=='1')

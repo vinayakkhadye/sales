@@ -1,24 +1,24 @@
 <div class="container">
-	<header>
-		<h3>Login User</h3>
-	</header>
 	<div class="row">
-		<div class="span3">
-			User Name:
-			<br />
-			<input data-ng-model="userName" type="text" placeholder="User Name">
+	<div class="col-sm-2"></div>
+	<div class="col-sm-4">
+		<header>
+			<h3>Login User</h3>
+		</header>
+		<div class="form-group">
+		  <label for="usr">User Name:</label>
+		  <input data-ng-model="userName" type="text" placeholder="User Name" class="form-control">
 		</div>
-		<div class="span3">
-			Last Name:
-			<br />
-			<input data-ng-model="password" type="password" placeholder="Password">
-		</div>
-		<div class="span3">
-			<br />
-			<button id="loginUser" class="btn btn-primary" type="button" 
+		<div class="form-group">
+		  <label for="pwd">Password:</label>
+		  <input data-ng-model="password" type="password" placeholder="Password" class="form-control">
+		</div>	
+		<button id="loginUser" class="btn btn-success" type="button" 
 			data-ng-disabled="!userName || !password" 
 			data-ng-click="login(userName,password)">Login</button>
+		<div class="alert alert-info" data-ng-hide="!message">
+			<strong>Info!</strong> {{message}}
 		</div>
-		<div class="span12">{{message}}</div>
+	</div>	
 	</div>
 </div>

@@ -18,16 +18,16 @@ app.controller('LoginController', function ($scope, $rootScope, $location, login
 		var userName 	= $scope.userName;
 		var password	= $scope.password;
 		$scope.isUser	= "";
-		$rootScope.userToken = $scope.userName;
 		
-		loginService.login(userName,password).then(function(response){
-			
+		loginService.login(userName,password).then(function(response)
+		{
 			$scope.message	= "";
 			console.log(response.data);
 			$scope.isUser	= response.data;
 			
 			if($scope.isUser=='1')
 			{
+				$rootScope.userToken = $scope.userName;
 				$location.path( "/orders" );
 			}
 			else

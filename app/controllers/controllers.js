@@ -73,14 +73,14 @@ app.controller('ChartsController', function ($scope, $routeParams,$location, cha
 			var day = false;
 			
 			$scope.ordersbydate = chartsService.getOrdersChartForMonth();	
-			
+			console.log($scope.ordersbydate);
 			for(val in $scope.ordersbydate)
 			{
 				day = new Date($scope.ordersbydate[val].orders.order_date);
 				day = day.toLocaleDateString("en-US")
 				$scope.dbDaysSale.push([day,$scope.ordersbydate[val][0].total_orders]);
 			}
-			
+			console.log($scope.dbDaysSale);
 			for(i=1;i<=noOfDays;i++)
 			{
 				day = new Date(y, m-1, i);

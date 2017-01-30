@@ -11,7 +11,9 @@ app.service('chartsService', function ($http,$q) {
             //cache: Schools.schoolCache,
         }).success(function(response) {
             //dfd.resolve(response.schools || response.school);
+			console.log('here');
 			console.log(response);
+			console.log('done');
         });
 		//return dfd.promise;
 		

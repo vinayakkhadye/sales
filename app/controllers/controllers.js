@@ -48,6 +48,9 @@ app.controller('OrdersController', function ($scope, $location, ordersService) {
 		obj.readonly			= true;
 		var date	=	new Date(new_delivery_date);		
 		if(angular.isDate(date) && $scope.old_delivery_date != new_delivery_date){
+			ordersService.updateDispatchDate().then(function(response){
+				console.log(response);
+			});
 			//console.log(id);	
 		}else
 		{

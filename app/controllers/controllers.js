@@ -61,23 +61,22 @@ app.controller('ChartsController', function ($scope, $routeParams,$location, cha
 		
 		if ($routeParams.chartName == 'getOrdersChartForMonth')
 		{
-			var currentDate 	= new Date(), y = currentDate.getFullYear(), m = currentDate.getMonth();
-			var noOfDays 		= new Date(y, m , 0).getDate();
-			$scope.labels 		= [];
-			$scope.monthDays 	= [];
-			$scope.monthSales 	= [];
-			$scope.dbDaysSale 	= [];
-			$scope.series 		= ['Products Sold'];
-			$scope.label_head 	= 'Orders Chart (Previous Month)';
-			
-			var day = false;
-			
 			chartsService.getOrdersChartForMonth().then(function(response) {
+				var currentDate 	= new Date(), y = currentDate.getFullYear(), m = currentDate.getMonth();
+				var noOfDays 		= new Date(y, m , 0).getDate();
+				$scope.labels 		= [];
+				$scope.monthDays 	= [];
+				$scope.monthSales 	= [];
+				$scope.dbDaysSale 	= [];
+				$scope.series 		= ['Products Sold'];
+				$scope.label_head 	= 'Orders Chart (Previous Month)';
+				
+				var day = false;
+				
 				$scope.ordersbydate = response.data;
 					
 				for(val in $scope.ordersbydate)
 				{
-					console.log($scope.ordersbydate[val]);
 					day = new Date($scope.ordersbydate[val].orders.order_date);
 					day = day.toLocaleDateString("en-US")
 					$scope.dbDaysSale.push([day,$scope.ordersbydate[val][0].total_orders]);
@@ -112,30 +111,28 @@ app.controller('ChartsController', function ($scope, $routeParams,$location, cha
 		}
 		else if ($routeParams.chartName == 'getProductsSaleChartForMonth')
 		{
-			var currentDate 	= new Date(), y = currentDate.getFullYear(), m = currentDate.getMonth();
-			var noOfDays 		= new Date(y, m , 0).getDate();
-			$scope.labels 		= [];
-			$scope.monthDays 	= [];
-			$scope.monthSales 	= [];
-			$scope.productSale 	= [];
-			$scope.series 		= ['Sales'];
-			$scope.label_head 	= 'product sales chart (previous month)';
 			
-			
-			
-			$scope.productsbyname = chartsService.getProductsSaleChartForMonth();	
-			
-			
-			for(val in $scope.productsbyname)
-			{
-				product 		= $scope.productsbyname[val].p.name;
-				product_sale	= $scope.productsbyname[val][0].total_product_sale;
-				console.log(product_sale);
-				$scope.labels.push(product);
-				$scope.productSale.push(product_sale);
-			}
-			$scope.data = [$scope.productSale];
-							
+			chartsService.getProductsSaleChartForMonth().then(function(response) {
+				var currentDate 	= new Date(), y = currentDate.getFullYear(), m = currentDate.getMonth();
+				var noOfDays 		= new Date(y, m , 0).getDate();
+				$scope.labels 		= [];
+				$scope.monthDays 	= [];
+				$scope.monthSales 	= [];
+				$scope.productSale 	= [];
+				$scope.series 		= ['Sales'];
+				$scope.label_head 	= 'product sales chart (previous month)';
+					
+				$scope.productsbyname = response.data;
+				for(val in $scope.productsbyname)
+				{
+					product 		= $scope.productsbyname[val].p.name;
+					product_sale	= $scope.productsbyname[val][0].total_product_sale;
+					console.log(product_sale);
+					$scope.labels.push(product);
+					$scope.productSale.push(product_sale);
+				}
+				$scope.data = [$scope.productSale];
+			});
 		}
 		else
 		{

@@ -2,47 +2,39 @@
 <html data-ng-app="customersApp">
 <head>
     <title>Vendor Managment | Application</title>
-    <link href="Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="Content/bootstrap-responsive.min.css" rel="stylesheet" />
-    <link href="Content/customerManagementStyles.css" rel="stylesheet" />
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1">
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link href="Content/customerManagementStyles.css" rel="stylesheet" />
+	
 </head>
 <body>
-    <div class="navbar ">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="brand " href="#/orders">
-                    <img src="Content/images/people.png" alt="logo"> Customer Manager
-                </a>
-                <ul class="nav nav-pills" data-ng-controller="NavbarController" data-ng-hide="userToken == false">
-					<li data-ng-class="{'active':getClass('/orders')}"><a href="#/orders">Orders</a></li>
-                    <li data-ng-class="{'active':getClass('/charts/getOrdersChartForMonth')}"><a href="#/charts/getOrdersChartForMonth">Sold vs Date</a></li>
-                    <li data-ng-class="{'active':getClass('/charts/getProductsSaleChartForMonth')}"><a href="#/charts/getProductsSaleChartForMonth">Product Total Sales vs Product Name</a></li>
-					<li><a ng-click= "logout()" href="#/">logout</a></li>
-                </ul>
-            </div>
-        </div>
-    </div >
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand" href="#/orders">Orders Management</a>
+		</div>
+		<ul class="nav navbar-nav" data-ng-controller="NavbarController" data-ng-hide="userToken == false">
+			<li data-ng-class="{'active':getClass('/orders')}"><a href="#/orders">Orders</a></li>
+			<li data-ng-class="{'active':getClass('/charts/getOrdersChartForMonth')}"><a href="#/charts/getOrdersChartForMonth">Sold vs Date</a></li>
+			<li data-ng-class="{'active':getClass('/charts/getProductsSaleChartForMonth')}"><a href="#/charts/getProductsSaleChartForMonth">Product Total Sales vs Product Name</a></li>
+			<li><a ng-click= "logout()" href="#/">logout</a></li>
+		</ul>
+	  </div>
+	</nav>
+	
 
     <!-- Note that AngularJS 1.2+ now has a built-in ng-animation direction. Left in animated-view to show a 
          custom directive -->
-    <div animated-view></div>
+    <div animated-view style="margin-top:50px;margin-bottom:50px;"></div>
 
-
-    <div id="footer">
-        <div class="navbar" style="margin-bottom:0px;">
-            <div class="navbar-inner">
-                <div class="container">
-                    <footer>
-                        <div class="row">
-                            <div class="span4">
-                                Created by Vinayak Khadye
-                            </div>
-                        </div>
-                   </footer>
-                </div>
-            </div>
-        </div>
-    </div>
+	<nav class="navbar navbar-inverse navbar-fixed-bottom">
+	  <div class="container-fluid">
+		<div class="navbar-header">
+		  <a class="navbar-brand" href="#">Created by Vinayak Khadye</a>
+		</div>
+	  </div>
+	</nav>
 
     <!-- Vendor Libs: jQuery only used for Bootstrap functionality -->
     <script src="Scripts/angular.js"></script>

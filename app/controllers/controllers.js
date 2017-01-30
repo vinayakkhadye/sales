@@ -80,7 +80,6 @@ app.controller('ChartsController', function ($scope, $routeParams,$location, cha
 				day = day.toLocaleDateString("en-US")
 				$scope.dbDaysSale.push([day,$scope.ordersbydate[val][0].total_orders]);
 			}
-			console.log($scope.dbDaysSale);
 			
 			for(i=1;i<=noOfDays;i++)
 			{
